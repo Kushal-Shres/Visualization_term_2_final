@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        h1 {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #333;
+        }
+        label {
+            color: #333;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .dropdown {
+            margin-bottom: 10px;
+        }
+        .grid-left {
+            grid-column: 1;
+        }
+        .grid-right {
+            grid-column: 2;
+        }
+        button[type="submit"] {
+            grid-column: 1 / -1;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .grid-left:nth-child(odd) {
+          background-color: #f0f0f0;
+        }
+        .grid-right:nth-child(even) {
+          background-color: #f0f0f0;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Enter Your Information</h1>
+        <form id="input-form" action="/api/submit" method="post" class = "container" style="display:grid !important;">
+            <div class="grid-left">
+                <label for="first_term_gpa">First Term GPA (0.0-4.5):</label>
+                <input type="number" id="first_term_gpa" name="first_term_gpa" required>
+
+                <label for="second_term_gpa">Second Term GPA (0.0-4.5):</label>
+                <input type="number" id="second_term_gpa" name="second_term_gpa" required>
+
+                <label for="first_language">First Language:</label>
+                <select class="dropdown" id="first_language" name="first_language" required>
+                    <option value="1">English</option>
+                    <option value="2">French</option>
+                    <option value="3">Other</option>
+                </select>
+
+                <label for="funding">Funding:</label>
+                <select class="dropdown" id="funding" name="funding" required>
+                    <option value="">Select an option</option>
+                    <option value="1">Apprentice_PS</option>
+                    <option value="2">GPOG_FT</option>
+                    <option value="3">Intl Offshore</option>
+                    <option value="4">Intl Regular</option>
+                    <option value="5">Intl Transfer</option>
+                    <option value="6">Joint Program Ryerson</option>
+                    <option value="7">Joint Program UTSC</option>
+                    <option value="8">Second Career Program</option>
+                    <option value="9">Work Safety Insurance Board</option>
+                </select>
+
+                <label for="school">School:</label>
+                <select class="dropdown" id="school" name="school" required>
+                    <option value="">Select a school</option>
+                    <option value="1">Advancement</option>
+                    <option value="2">Business</option>
+                    <option value="3">Communications</option>
+                    <option value="4">Community and Health</option>
+                    <option value="5">Hospitality</option>
+                    <option value="6">Engineering</option>
+                    <option value="7">Transportation</option>
+                </select>
+
+                <label for="fast_track">Fast Track:</label>
+                <select class="dropdown" id="fast_track" name="fast_track" required>
+                    <option value="">Select an option</option>
+                    <option value="1">Y</option>
+                    <option value="2">N</option>
+                </select>
+
+                <label for="coop">Coop:</label>
+                <select class="dropdown" id="coop" name="coop" required>
+                    <option value="">Select an option</option>
+                    <option value="1">Y</option>
+                    <option value="2">N</option>
+                </select>
+            </div>
+            <div class="grid-right">
+
+
+                <label for="residency">Residency:</label>
+                <select class="dropdown" id="residency" name="residency" required>
+                    <option value="">Select an option</option>
+                    <option value="1">Domestic</option>
+                    <option value="2">International</option>
+                </select>
+
+                <label for="gender">Gender:</label>
+                <select class="dropdown" id="gender" name="gender" required>
+                    <option value="">Select an option</option>
+                    <option value="1">Female</option>
+                    <option value="2">Male</option>
+                    <option value="3">Neutral</option>
+                </select>
+
+                <label for="prev_education">Previous Education:</label>
+                <select class="dropdown" id="prev_education" name="prev_education" required>
+                    <option value="">Select an option</option>
+                    <option value="1">High School</option>
+                    <option value="2">Post-Secondary</option>
+                </select>
+
+                <label for="age_group">Age Group:</label>
+                <select class="dropdown" id="age_group" name="age_group" required>
+                    <option value="">Select an age group</option>
+                    <option value="1">0 to 18</option>
+                    <option value="2">19 to 20</option>
+                    <option value="3">21 to 25</option>
+                    <option value="4">26 to 30</option>
+                    <option value="5">31 to 35</option>
+                    <option value="6">36 to 40</option>
+                    <option value="7">41 to 50</option>
+                    <option value="8">51 to 60</option>
+                    <option value="9">61 to 65</option>
+                    <option value="10">66+</option>
+                </select>
+
+                <label for="high_school_average">High School Average Mark (0.0-100.0):</label>
+                <input type="number" id="high_school_average" name="high_school_average" required>
+
+                <label for="math_score">Math Score (0.0-50.0):</label>
+                <input type="number" id="math_score" name="math_score" required>
+
+                <label for="english_grade">English Grade:</label>
+                <select class="dropdown" id="english_grade" name="english_grade" required>
+                    <option value="">Select an English grade</option>
+                    <option value="1">Level-130</option>
+                    <option value="2">Level-131</option>
+                    <option value="3">Level-140</option>
+                    <option value="4">Level-141</option>
+                    <option value="5">Level-150</option>
+                    <option value="6">Level-151</option>
+                    <option value="7">Level-160</option>
+                    <option value="8">Level-161</option>
+                    <option value="9">Level-170</option>
+                    <option value="10">Level-171</option>
+                    <option value="11">Level-180</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="response-container"></div>
+    </div>
+
+    <script>
+        document.getElementById('input-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var form = event.target;
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the returned data
+                displayResponse(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        function displayResponse(data) {
+            var responseContainer = document.getElementById('response-container');
+            responseContainer.innerHTML = ''; // Clear previous content
+
+            var responseHeading = document.createElement('h2');
+            responseHeading.textContent = 'Returned Data:';
+            responseContainer.appendChild(responseHeading);
+
+            var responseDataList = document.createElement('ul');
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    var listItem = document.createElement('li');
+                    listItem.textContent = key + ': ' + data[key];
+                    responseDataList.appendChild(listItem);
+                }
+            }
+            responseContainer.appendChild(responseDataList);
+        }
+    </script>
+</body>
+</html>
